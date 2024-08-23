@@ -171,7 +171,7 @@
 				} ); */
 
 				// Create soft volumes
-/* 				const volumeMass = 15;
+				const volumeMass = 15;
 
 				const sphereGeometry = new THREE.SphereGeometry( 1.5, 40, 25 );
 				sphereGeometry.translate( 5, 5, 0 );
@@ -179,7 +179,11 @@
 
 				const boxGeometry = new THREE.BoxGeometry( 1, 1, 5, 4, 4, 20 );
 				boxGeometry.translate( - 2, 5, 0 );
-				createSoftVolume( boxGeometry, volumeMass, 120 ); */
+				createSoftVolume( boxGeometry, volumeMass, 120 );
+
+				const PunchGeometry = new THREE.PunchGeometry( 1, 1, 5, 4, 4, 20 );
+				PunchGeometry.translate( - 2, 5, 0 );
+				createSoftVolume( PunchGeometry, volumeMass, 120 );
 
 				// Ramp
 				pos.set( 3, 1, 0 );
@@ -252,7 +256,7 @@
 
 			}
 
-/* 			function createSoftVolume( bufferGeom, mass, pressure ) {
+			function createSoftVolume( bufferGeom, mass, pressure ) {
 
 				processGeometry( bufferGeom );
 
@@ -302,22 +306,23 @@
 				// Disable deactivation
 				volumeSoftBody.setActivationState( 4 );
 
-				softBodies.push( volume );
+/* 				softBodies.push( volume ); */
 
-			} */
+			}
 
             const loader = new GLTFLoader();
 
                 loader.load( 'textures/scene.gltf', function ( gltf ) {
 
-                    gltf.scene.scale.set(5, 5, 5);
-                    scene.add( gltf.scene );
+					const threObject = new THREE.Mesh( new THREE.PunchGeometry( sx, sy, sz, 1, 1, 1 ), material );
+                    gltf.scene.scale.set(4.5, 4.5, 4.5);
+					gltf.scene.scale.set( 10, 10 );
 
-                }, undefined, function ( error ) {
+					createRigidBody( threObject, shape, mass, pos, quat );
+                    scene.add( threObject );
 
-                    console.error( error );
 
-            } );
+                }, );
 
 			function createParalellepiped( sx, sy, sz, mass, pos, quat, material ) {
 
