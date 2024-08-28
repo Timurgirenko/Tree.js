@@ -159,7 +159,7 @@
 				const ground = createParalellepiped( 40, 1, 40, 0, pos, quat, new THREE.MeshPhongMaterial( { color: 0xFFFFFF } ) );
 				ground.castShadow = true;
 				ground.receiveShadow = true;
-/* 				textureLoader.load( 'textures/grid.png', function ( texture ) {
+ 				textureLoader.load( 'textures/grid.png', function ( texture ) {
 
 					texture.colorSpace = THREE.SRGBColorSpace;
 					texture.wrapS = THREE.RepeatWrapping;
@@ -168,10 +168,14 @@
 					ground.material.map = texture;
 					ground.material.needsUpdate = true;
 
-				} ); */
+				} ); 
 
 				// Create soft volumes
 				const volumeMass = 15;
+
+
+
+
 
 				const sphereGeometry = new THREE.SphereGeometry( 1.5, 40, 25 );
 				sphereGeometry.translate( 5, 15, 0 );
@@ -310,12 +314,28 @@
 
                 loader.load( 'textures/scene.gltf', function ( gltf ) {
 
-                    gltf.scene.scale.set(4.5, 4.5, 4.5);
-					gltf.scene.scale.set( 10, 10 );
-                    scene.add( gltf.scene );
+
+/* 					const gltf = new THREE.gltf( 4, 4, 4 );
+					gltf.translate( 5, 15, 0 );
+					createSoftVolume( gltf, volumeMass, 50 ); */
+					gltf.scene.scale.set( 4, 4, 4 );
+					scene.add( gltf.scene);
+					gltf.material.map = texture;
+					gltf.material.needsUpdate = true;
+
+			}, );
+
+/* 			const loader = new GLTFLoader();
+
+				loader.load( 'textures/scene1.gltf', function ( gltf ) {
+
+					gltf.scene.scale.set(4.5, 4.5, 4.5);
+					scene.add( gltf.scene.children[0] );
+					gltf.material.map = texture;
+					gltf.material.needsUpdate = true;
 
 
-                }, );
+			}, ); */
 
 			function createParalellepiped( sx, sy, sz, mass, pos, quat, material ) {
 
